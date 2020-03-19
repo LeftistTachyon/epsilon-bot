@@ -39,6 +39,12 @@ public class Commands {
         // the "!!help" command
         metaCommands.add(HelpCommand.getHelpCommand());
 
+        // the "!!github" command
+        metaCommands.add(new ConsumerCommand(event -> {
+            event.getChannel().sendMessage("You can find my source code (here)[https://github.com/LeftistTachyon/epsilon-bot]!")
+                    .queue();
+        }, "Links to my source code on GitHub", new String[]{"github"}));
+
         // add the "Meta" commands
         commands.put("Meta", metaCommands);
     }

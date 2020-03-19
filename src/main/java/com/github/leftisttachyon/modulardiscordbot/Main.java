@@ -1,5 +1,6 @@
 package com.github.leftisttachyon.modulardiscordbot;
 
+import ch.qos.logback.core.subst.Token;
 import com.github.leftisttachyon.modulardiscordbot.commands.Command;
 import com.github.leftisttachyon.modulardiscordbot.commands.Commands;
 import net.dv8tion.jda.api.AccountType;
@@ -23,6 +24,8 @@ import static com.github.leftisttachyon.modulardiscordbot.commands.Command.PREFI
  * @since 0.9.0
  */
 public class Main extends ListenerAdapter {
+    // perm number: 477248
+    // invite link: https://discordapp.com/api/oauth2/authorize?client_id=690006370140815500&permissions=477248&redirect_uri=http%3A%2F%2Fdsipaint.com%2Fgroup%2F%3Fid%3D11945&response_type=code&scope=bot
 
     /**
      * The logger for this application
@@ -43,7 +46,9 @@ public class Main extends ListenerAdapter {
     public static void main(String[] args) {
         try {
             JDABuilder builder = new JDABuilder(AccountType.BOT);
-            builder.setToken(Token.getToken());
+            String envvar = System.getenv("BOT-TOKEN");
+            log.debug("EnvVar: {}", envvar);
+            builder.setToken(envvar);
             builder.addEventListeners(new Main());
             log.info("JDABuilder initialized");
             builder.build();

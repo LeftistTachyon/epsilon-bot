@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fe355d1-934b-4e17-9c79-6abd6eb569ac" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/azureSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/GithubCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpeedRunBot.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/modulardiscordbot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/modulardiscordbot/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/modulardiscordbot/commands/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/modulardiscordbot/commands/Commands.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +50,9 @@
   <component name="RecentsManager">
     <key name="MoveInnerDialog.RECENTS_KEY">
       <recent name="com.github.leftisttachyon.speedrunbot" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.github.leftisttachyon.modulardiscordbot" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -112,6 +119,22 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state width="914" height="281" key="GridCell.Tab.0.bottom" timestamp="1584588112751">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584588112751" />
+    <state width="914" height="281" key="GridCell.Tab.0.center" timestamp="1584588112751">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584588112751" />
+    <state width="914" height="281" key="GridCell.Tab.0.left" timestamp="1584588112750">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584588112750" />
+    <state width="914" height="281" key="GridCell.Tab.0.right" timestamp="1584588112751">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584588112751" />
     <state x="1136" y="252" width="607" height="536" key="find.popup" timestamp="1584578091303">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

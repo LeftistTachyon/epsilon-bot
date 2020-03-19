@@ -4,15 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.leftisttachyon</groupId>
-    <artifactId>ModularDiscordBot</artifactId>
+    <artifactId>epsilon-bot</artifactId>
 
-    <version>0.9.0</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Modular Discord Bot</name>
-    <url>https://github.com/LeftistTachyon/ModularDiscordBot</url>
+    <name>Epsilon</name>
+    <url>https://github.com/LeftistTachyon/epsilon-bot</url>
     <description>A template GitHub repository for easily creating a Discord bot.</description>
-    <inceptionYear>2019</inceptionYear>
+    <inceptionYear>2020</inceptionYear>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,6 +22,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <exec-plugin.version>1.6.0</exec-plugin.version>
+        <maven-jar.version>3.2.0</maven-jar.version>
         <jda.version>4.0.0_62</jda.version>
         <logback.version>1.2.3</logback.version>
     </properties>
@@ -46,6 +47,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar.version}</version>
 
                 <configuration>
                     <archive>

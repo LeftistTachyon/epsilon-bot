@@ -1,8 +1,8 @@
-# ModularDiscordBot
-A template GitHub repository for easily creating a Discord bot.  
+# Epsilon
+A music trade bot for Discord! Made especially for **RD: The Sequel** group in DSiPaint.  
 
 ## Usage  
-To use this repo, create a new repository on GitHub with this repository as its template.  
-Once that's been created, create a `Token` class with a `public static String getToken()` method that returns the token of your bot.  
-To create methods, extend either `Command` or `Subcommand` or create a `ConsumerCommand` or `ConsumerSubcommand` object and supply the code to be executed. Make sure the created commands are added to the `TreeMap` in the `Commands` class.  
-Once you run the `Main` class, the bot should be functional!
+Clone this repository onto your computer. Right now, this bot is under development, so this project can only be logically run through IntelliJ.  
+(You can, however, type the command `mvn exec:java` after you've compiled the code and finished the below steps as well, which will also work. Just make sure you do it in Command Prompt or Powershell and not in Git Bash or stopping the program will be a pain in the bum.)  
+Once that's been done, create a `BOT-TOKEN` system environment variable, and set it to the bot token given to you by Discord's Developer Portal.  
+Just run the `com.github.leftisttachyon.modulardiscordbot.Main` class and you're good to go!
