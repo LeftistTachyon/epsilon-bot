@@ -53,8 +53,15 @@ public class OptCommands {
      * @param evt the event created by the user's message
      */
     private static void optIn(MessageReceivedEvent evt) {
-        String message = evt.getMessage().getContentRaw(),
-                data = message.substring(message.indexOf(' ')).toLowerCase();
+        String message = evt.getMessage().getContentRaw();
+        if (!message.contains(" ")) {
+            evt.getChannel().sendMessage("You need to specify what you want to opt in to!\n" +
+                    "To opt in to song trades, type `" + PREFIX + "optin song`.\n" +
+                    "To opt in to album trades, type `" + PREFIX + "optin album`.").queue();
+            return;
+        }
+
+        String data = message.substring(message.indexOf(' ') + 1).toLowerCase();
         if ("song".equals(data)) {
             evt.getChannel().sendMessage("So you want to opt in to the song trades?").queue();
         } else if ("album".equals(data)) {
@@ -70,8 +77,15 @@ public class OptCommands {
      * @param evt the event created by the user's message
      */
     private static void optOut(MessageReceivedEvent evt) {
-        String message = evt.getMessage().getContentRaw(),
-                data = message.substring(message.indexOf(' ')).toLowerCase();
+        String message = evt.getMessage().getContentRaw();
+        if (!message.contains(" ")) {
+            evt.getChannel().sendMessage("You need to specify what you want to opt out of!\n" +
+                    "To opt out of song trades, type `" + PREFIX + "optin song`.\n" +
+                    "To opt out of album trades, type `" + PREFIX + "optin album`.").queue();
+            return;
+        }
+
+        String data = message.substring(message.indexOf(' ') + 1).toLowerCase();
         if ("song".equals(data)) {
             evt.getChannel().sendMessage("So you want to opt out of the song trades?").queue();
         } else if ("album".equals(data)) {
