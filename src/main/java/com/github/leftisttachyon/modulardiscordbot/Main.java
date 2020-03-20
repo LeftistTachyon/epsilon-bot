@@ -1,8 +1,8 @@
 package com.github.leftisttachyon.modulardiscordbot;
 
-import ch.qos.logback.core.subst.Token;
 import com.github.leftisttachyon.modulardiscordbot.commands.Command;
 import com.github.leftisttachyon.modulardiscordbot.commands.Commands;
+import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -23,14 +23,10 @@ import static com.github.leftisttachyon.modulardiscordbot.commands.Command.PREFI
  * @author LeftistTachyon
  * @since 0.9.0
  */
+@Slf4j
 public class Main extends ListenerAdapter {
     // perm number: 477248
-    // invite link: https://discordapp.com/api/oauth2/authorize?client_id=690006370140815500&permissions=477248&redirect_uri=http%3A%2F%2Fdsipaint.com%2Fgroup%2F%3Fid%3D11945&response_type=code&scope=bot
-
-    /**
-     * The logger for this application
-     */
-    private static final Logger log = LoggerFactory.getLogger(Main.class);
+    // invite link: https://discordapp.com/api/oauth2/authorize?client_id=690006370140815500&permissions=537348160&redirect_uri=http%3A%2F%2Fdsipaint.com%2Fgroup%2F%3Fid%3D11945&response_type=code&scope=bot
 
     /**
      * Creates a new Main object
@@ -46,7 +42,7 @@ public class Main extends ListenerAdapter {
     public static void main(String[] args) {
         try {
             JDABuilder builder = new JDABuilder(AccountType.BOT);
-            String envvar = System.getenv("BOT-TOKEN");
+            String envvar = System.getenv("BOT_TOKEN");
             log.debug("EnvVar: {}", envvar);
             builder.setToken(envvar);
             builder.addEventListeners(new Main());

@@ -21,13 +21,16 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
+        <azure-blob.version>11.0.0</azure-blob.version>
         <exec-plugin.version>1.6.0</exec-plugin.version>
+        <lombok.version>1.18.12</lombok.version>
         <maven-jar.version>3.2.0</maven-jar.version>
         <jda.version>4.0.0_62</jda.version>
         <logback.version>1.2.3</logback.version>
     </properties>
 
     <dependencies>
+        <!-- Discord API -->
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
@@ -39,6 +42,21 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+
+        <!-- For Azure Blob -->
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-storage-blob</artifactId>
+            <version>${azure-blob.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

@@ -1,5 +1,6 @@
 package com.github.leftisttachyon.modulardiscordbot.commands;
 
+import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,13 +15,8 @@ import java.util.function.Consumer;
  * @see Subcommand
  * @since 0.9.0
  */
+@Slf4j
 public class ConsumerSubcommand extends Subcommand {
-
-    /**
-     * The logger for this class
-     */
-    private static final Logger log = LoggerFactory.getLogger(ConsumerSubcommand.class);
-
     /**
      * The code that the function executes
      */

@@ -49,14 +49,14 @@ public class HelpCommand extends Command {
     public void invoke(MessageReceivedEvent event) {
         EmbedBuilder builder = new EmbedBuilder();
         // color: 245, 197, 83
-        builder.setColor(new Color(245, 197, 83));
+        builder.setColor(new Color(75, 168, 36));
         String message = event.getMessage().getContentRaw();
         String[] data = message.substring(PREFIX.length()).split("\\s+");
         // logger.trace("data: {}", Arrays.toString(data));
         assert data.length > 0 : "data.length is less than or equal to 0 " + Arrays.toString(data);
 
-        String failMessage = "I can't seem to find what you're looking for.\n\"" +
-                message.substring(message.indexOf(' ') + 1) + "\" doesn't match anything of what I have.";
+        String failMessage = "I can't seem to find what you're looking for.\n`" + PREFIX +
+                message.substring(message.indexOf(' ') + 1) + "` doesn't match anything of what I have.";
         switch (data.length) {
             case 1:
                 // title: "Help"
@@ -66,7 +66,7 @@ public class HelpCommand extends Command {
                         "help <command>`. For a subcommand, say `" + PREFIX + "help <command> <subcommand>`. To run a command, say `" +
                         PREFIX + "<command>`.");
                 // thumbnail: bot icon, but better
-                builder.setThumbnail("https://cdn.discordapp.com/app-assets/647269383345012736/650784079859548160.png");
+                builder.setThumbnail("https://cdn.discordapp.com/app-assets/690006370140815500/690347867751448577.png");
                 // go through entries of command map
                 for (String module : Commands.getCommands().keySet()) {
                     // for the body of the field
@@ -87,11 +87,17 @@ public class HelpCommand extends Command {
                 break;
             case 2:
                 String command = data[1];
-                embedSpecificHelp(event, command, builder, failMessage);
+
+                if (!embedSpecificHelp(event, command, builder, failMessage)) {
+                    return;
+                }
                 break;
             case 3:
                 command = data[1] + " " + data[2];
-                embedSpecificHelp(event, command, builder, failMessage);
+
+                if (!embedSpecificHelp(event, command, builder, failMessage)) {
+                    return;
+                }
                 break;
             default:
                 event.getChannel().sendMessage(failMessage).queue();
@@ -99,7 +105,6 @@ public class HelpCommand extends Command {
         }
 
         event.getChannel().sendMessage(builder.build()).queue();
-
     }
 
     /**
@@ -109,8 +114,9 @@ public class HelpCommand extends Command {
      * @param command     the command to create a specific help embed for
      * @param builder     the EmbedBuilder to add on to
      * @param failMessage the message to send if the command cannot be found
+     * @return whether the given command exists
      */
-    private void embedSpecificHelp(MessageReceivedEvent event, String command,
+    private boolean embedSpecificHelp(MessageReceivedEvent event, String command,
                                    EmbedBuilder builder, String failMessage) {
         Command command_ = null;
         outer:
@@ -124,7 +130,7 @@ public class HelpCommand extends Command {
         }
         if (command_ == null) {
             event.getChannel().sendMessage(failMessage).queue();
-            return;
+            return false;
         }
 
         // title: "Help on `!!{}`"
@@ -153,6 +159,7 @@ public class HelpCommand extends Command {
         sBuilder.append("```");
 
         builder.setDescription(sBuilder.toString());
+        return true;
     }
 
 }

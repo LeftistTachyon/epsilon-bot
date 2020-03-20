@@ -95,9 +95,9 @@ public abstract class Command {
      */
     protected boolean shouldInvoke(String[] data) {
         boolean startsWith = data[0].startsWith(PREFIX), isAlias = isAlias(data[0].substring(PREFIX.length()));
-        log.trace("shouldInvoke for {}: {} {} {}", getPrimaryAlias(), data.length > 0, startsWith,
+        log.trace("shouldInvoke for {}: {} {}", getPrimaryAlias(), startsWith,
                 isAlias);
-        return data.length > 0 && startsWith && isAlias;
+        return startsWith && isAlias;
     }
 
     /**

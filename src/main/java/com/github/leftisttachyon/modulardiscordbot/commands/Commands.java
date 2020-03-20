@@ -1,6 +1,10 @@
 package com.github.leftisttachyon.modulardiscordbot.commands;
 
+import com.github.leftisttachyon.epsilon.OptCommands;
 import com.github.leftisttachyon.modulardiscordbot.commands.impl.HelpCommand;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.internal.entities.AbstractMessage;
+import net.dv8tion.jda.internal.entities.DataMessage;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
@@ -30,7 +34,7 @@ public class Commands {
         metaCommands.add(new ConsumerCommand(event -> {
             OffsetDateTime time = event.getMessage().getTimeCreated(),
                     now = OffsetDateTime.now();
-            Duration delay = Duration.between(time, now);
+            Duration delay = Duration.between(time, now).abs();
             long millis = delay.toMillis();
 
             event.getChannel().sendMessageFormat("Pong! The delay is %,d milliseconds.", millis).queue();
@@ -40,13 +44,24 @@ public class Commands {
         metaCommands.add(HelpCommand.getHelpCommand());
 
         // the "!!github" command
-        metaCommands.add(new ConsumerCommand(event -> {
-            event.getChannel().sendMessage("You can find my source code (here)[https://github.com/LeftistTachyon/epsilon-bot]!")
-                    .queue();
-        }, "Links to my source code on GitHub", new String[]{"github"}));
+        metaCommands.add(new ConsumerCommand(event -> event.getChannel()
+                .sendMessage("You can find my source code here:\nhttps://github.com/LeftistTachyon/epsilon-bot")
+                .queue(), "Links to my source code on GitHub", new String[]{"github"}));
 
         // add the "Meta" commands
         commands.put("Meta", metaCommands);
+
+        // a list of "Song Trade"-related commands
+        List<Command> songTradeCommands = new ArrayList<>();
+
+        // the "!!optin" command
+        songTradeCommands.add(OptCommands.getOptInCommand());
+
+        // the "!!optout" command
+        songTradeCommands.add(OptCommands.getOptOutCommand());
+
+        // add the "Song Trade" commands
+        commands.put("Song Trades", songTradeCommands);
     }
 
     /**
