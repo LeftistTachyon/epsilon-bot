@@ -1,16 +1,21 @@
 package com.github.leftisttachyon.modulardiscordbot;
 
+import com.github.leftisttachyon.epsilon.GuildInfoService;
 import com.github.leftisttachyon.modulardiscordbot.commands.Command;
 import com.github.leftisttachyon.modulardiscordbot.commands.Commands;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.AccountType;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.events.ShutdownEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import javax.security.auth.login.LoginException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
@@ -47,8 +52,21 @@ public class Main extends ListenerAdapter {
             builder.setToken(envvar);
             builder.addEventListeners(new Main());
             log.info("JDABuilder initialized");
-            builder.build();
+
+            JDA build = builder.build();
             log.trace("JDABuilder#build() invoked");
+
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in))) {
+                String line;
+                while ((line = in.readLine()) != null) {
+                    if ("q".equalsIgnoreCase(line)) {
+                        build.shutdown();
+                        log.info("Shutdown initiated.");
+                    }
+                }
+            } catch (IOException e) {
+                log.warn("Could not read input message", e);
+            }
         } catch (LoginException ex) {
             log.error("Could not log in successfully", ex);
         }
@@ -81,12 +99,24 @@ public class Main extends ListenerAdapter {
         outer:
         for (List<Command> commandList : commands.values()) {
             for (Command c : commandList) {
-                log.trace("Checking for invokation of {}{}", PREFIX, c.getPrimaryAlias());
+                log.trace("Checking for invocation of {}{}", PREFIX, c.getPrimaryAlias());
+
                 if (c.shouldInvoke(message)) {
                     c.invoke(event);
                     break outer;
                 }
             }
         }
+    }
+
+    @Override
+    public void onShutdown(@Nonnull ShutdownEvent event) {
+        log.info("Shutting down...");
+
+        GuildInfoService.getInstance().close();
+
+        log.info("Save and close successful, now exiting");
+
+        System.exit(0);
     }
 }

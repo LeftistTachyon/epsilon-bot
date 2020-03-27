@@ -1,10 +1,9 @@
 package com.github.leftisttachyon.modulardiscordbot.commands;
 
-import com.github.leftisttachyon.epsilon.OptCommands;
+import com.github.leftisttachyon.epsilon.GuildInfoService;
+import com.github.leftisttachyon.epsilon.OptInCommand;
+import com.github.leftisttachyon.epsilon.OptOutCommand;
 import com.github.leftisttachyon.modulardiscordbot.commands.impl.HelpCommand;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.internal.entities.AbstractMessage;
-import net.dv8tion.jda.internal.entities.DataMessage;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
@@ -25,6 +24,7 @@ public class Commands {
     private static final TreeMap<String, List<Command>> commands;
 
     static {
+        // the map
         commands = new TreeMap<>();
 
         // a list of "Meta" commands
@@ -55,10 +55,10 @@ public class Commands {
         List<Command> songTradeCommands = new ArrayList<>();
 
         // the "!!optin" command
-        songTradeCommands.add(OptCommands.getOptInCommand());
+        songTradeCommands.add(new OptInCommand());
 
         // the "!!optout" command
-        songTradeCommands.add(OptCommands.getOptOutCommand());
+        songTradeCommands.add(new OptOutCommand());
 
         // add the "Song Trade" commands
         commands.put("Song Trades", songTradeCommands);
