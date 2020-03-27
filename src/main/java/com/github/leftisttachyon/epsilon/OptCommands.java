@@ -3,6 +3,7 @@ package com.github.leftisttachyon.epsilon;
 import com.github.leftisttachyon.modulardiscordbot.commands.Command;
 import com.github.leftisttachyon.modulardiscordbot.commands.ConsumerCommand;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.github.leftisttachyon.modulardiscordbot.commands.Command.PREFIX;
 
@@ -28,6 +29,9 @@ public class OptCommands {
             "A command that opts out of the regular song or album trades.\n" +
                     "To opt out of song trades, then type \"" + PREFIX + "optout song\".\n" +
                     "To opt out of album trades, then type \"" + PREFIX + "optout album\".", new String[]{"optout"});
+
+    @Autowired
+    private static ServerInfoService serverInfoService;
 
     /**
      * Returns the {@link Command} that can opt in users.
