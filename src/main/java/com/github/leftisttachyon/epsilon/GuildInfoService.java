@@ -48,18 +48,16 @@ public class GuildInfoService implements Closeable {
     /**
      * Gets the {@link GuildConfig} object associated with the guild with the given ID.
      *
-     * @param guild             the {@link Guild} to get the configuration for
+     * @param guildID           the {@link Guild} to get the configuration for
      * @param createIfNotExists whether to create an entry for the given guild
      * @return the {@link GuildConfig} associated with the given guild, or {@code null} if none could be found and
      * {@code createIfNotExists} is false
      */
-    public GuildConfig getGuildConfig(Guild guild, boolean createIfNotExists) {
-        long guildID = guild.getIdLong();
-
+    public GuildConfig getGuildConfig(long guildID, boolean createIfNotExists) {
         if (serverContainers.containsKey(guildID)) {
             return serverContainers.get(guildID).config;
         } else if (createIfNotExists) {
-            GuildData blank = new GuildData(guild, true);
+            GuildData blank = new GuildData(guildID, false);
             serverContainers.put(guildID, blank);
 
             return blank.config;
@@ -69,18 +67,16 @@ public class GuildInfoService implements Closeable {
     /**
      * Gets the {@link UserData} object associated with the given guild and user.
      *
-     * @param guild             the {@link Guild} to look for
+     * @param guildID           the {@link Guild} to look for
      * @param user              the {@link User} to look for
      * @param createIfNotExists whether to create a corresponding object if it cannot be found
      * @return the found or created object or {@link null}
      */
-    public UserData getUserData(Guild guild, User user, boolean createIfNotExists) {
-        long guildID = guild.getIdLong();
-
+    public UserData getUserData(long guildID, User user, boolean createIfNotExists) {
         if (serverContainers.containsKey(guildID)) {
             return serverContainers.get(guildID).getUserData(user, createIfNotExists);
         } else if (createIfNotExists) {
-            GuildData blank = new GuildData(guild, true);
+            GuildData blank = new GuildData(guildID, false);
             serverContainers.put(guildID, blank);
 
             long userID = user.getIdLong();
@@ -106,7 +102,7 @@ public class GuildInfoService implements Closeable {
         /**
          * The {@link Guild} object that this object wraps.
          */
-        private final Guild guild;
+        private final long guildID;
         /**
          * The {@link BlobModel} that stores the config of the guild.
          */
@@ -125,15 +121,17 @@ public class GuildInfoService implements Closeable {
         private HashMap<Long, UserData> users;
 
         /**
-         * Creates a new {@link GuildData} object based around the given {@link Guild} object.
+         * Creates a new {@link GuildData} object based around the given guild.
          *
-         * @param guild the {@link Guild} to base this object off of
-         * @param blank whether to create a blank instance or fill this instance with data from the cloud.
+         * @param guildID the {@link Guild} to base this object off of
+         * @param blank   whether to create a blank instance or fill this instance with data from the cloud.
          */
-        public GuildData(Guild guild, boolean blank) {
-            this.guild = guild;
+        public GuildData(long guildID, boolean blank) {
+            log.info("Creating guild #{} ({})", guildID, blank);
 
-            ContainerModel container = new ContainerModel(guild.getId());
+            this.guildID = guildID;
+
+            ContainerModel container = new ContainerModel(String.valueOf(guildID));
 
             configBlob = container.createBlob("config.dat");
             userBlob = container.createBlob("users.dat");
@@ -168,7 +166,7 @@ public class GuildInfoService implements Closeable {
 
                 userBlob.uploadFile(f2);
             } catch (IOException e) {
-                log.warn("Could not upload configuration or user data for server #" + guild.getId(), e);
+                log.warn("Could not upload configuration or user data for server #" + guildID, e);
             }
         }
 
@@ -199,8 +197,9 @@ public class GuildInfoService implements Closeable {
             try (FileInputStream fis = new FileInputStream(configBlob.getBlob());
                  ObjectInputStream ois = new ObjectInputStream(fis)) {
                 config = (GuildConfig) ois.readObject();
+                log.info("config: {}", config);
             } catch (IOException | ClassNotFoundException e) {
-                log.warn("Could not load configuration for guild #" + guild.getId(), e);
+                log.warn("Could not load configuration for guild #" + guildID, e);
 
                 config = new GuildConfig();
             }
@@ -213,8 +212,9 @@ public class GuildInfoService implements Closeable {
             try (FileInputStream fis = new FileInputStream(userBlob.getBlob());
                  ObjectInputStream ois = new ObjectInputStream(fis)) {
                 users = (HashMap<Long, UserData>) ois.readObject();
+                log.info("users: {}", users);
             } catch (IOException | ClassNotFoundException e) {
-                log.warn("Could not load user data for guild #" + guild.getId(), e);
+                log.warn("Could not load user data for guild #" + guildID, e);
 
                 users = new HashMap<>();
             }

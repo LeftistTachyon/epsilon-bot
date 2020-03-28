@@ -34,9 +34,10 @@ public class OptInCommand extends Command {
         }
 
         String data = message.substring(message.indexOf(' ') + 1).toLowerCase();
+        UserData userData = GuildInfoService.getInstance()
+                .getUserData(evt.getGuild().getIdLong(), evt.getAuthor(), true);
+
         if ("song".equals(data)) {
-            UserData userData = GuildInfoService.getInstance()
-                    .getUserData(evt.getGuild(), evt.getAuthor(), true);
             if (userData.isInSong()) {
                 evt.getChannel().sendMessage("You're already opted into song trades.").queue();
             } else {
@@ -45,9 +46,6 @@ public class OptInCommand extends Command {
                 evt.getChannel().sendMessage("Successfully opted you into song trades!").queue();
             }
         } else if ("album".equals(data)) {
-            UserData userData = GuildInfoService.getInstance()
-                    .getUserData(evt.getGuild(), evt.getAuthor(), true);
-
             if (userData.hasParticipated()) {
                 if (userData.isInAlbum()) {
                     evt.getChannel().sendMessage("You're already opted into album trades.").queue();
@@ -62,5 +60,7 @@ public class OptInCommand extends Command {
         } else {
             evt.getChannel().sendMessage("`" + data + "` doesn't match any type of music trades that I know.").queue();
         }
+
+        log.info("User after opting in: {}", userData);
     }
 }

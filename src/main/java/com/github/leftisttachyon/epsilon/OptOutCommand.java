@@ -34,32 +34,29 @@ public class OptOutCommand extends Command {
         }
 
         String data = message.substring(message.indexOf(' ') + 1).toLowerCase();
-        if ("song".equals(data)) {
-            UserData userData = GuildInfoService.getInstance()
-                    .getUserData(evt.getGuild(), evt.getAuthor(), false);
-            if (userData != null) {
-                if (!userData.isInSong()) {
-                    evt.getChannel().sendMessage("You're already opted out of song trades.").queue();
-                } else {
-                    userData.setInSong(false);
+        UserData userData = GuildInfoService.getInstance()
+                .getUserData(evt.getGuild().getIdLong(), evt.getAuthor(), true);
 
-                    evt.getChannel().sendMessage("Successfully opted you out of song trades!").queue();
-                }
+        if ("song".equals(data)) {
+            if (!userData.isInSong()) {
+                evt.getChannel().sendMessage("You're already opted out of song trades.").queue();
+            } else {
+                userData.setInSong(false);
+
+                evt.getChannel().sendMessage("Successfully opted you out of song trades!").queue();
             }
         } else if ("album".equals(data)) {
-            UserData userData = GuildInfoService.getInstance()
-                    .getUserData(evt.getGuild(), evt.getAuthor(), false);
-            if (userData != null) {
-                if (!userData.isInAlbum()) {
-                    evt.getChannel().sendMessage("You're already opted out of album trades.").queue();
-                } else {
-                    userData.setInAlbum(false);
+            if (!userData.isInAlbum()) {
+                evt.getChannel().sendMessage("You're already opted out of album trades.").queue();
+            } else {
+                userData.setInAlbum(false);
 
-                    evt.getChannel().sendMessage("Successfully opted you out of album trades!").queue();
-                }
+                evt.getChannel().sendMessage("Successfully opted you out of album trades!").queue();
             }
         } else {
             evt.getChannel().sendMessage("`" + data + "` doesn't match any type of music trades that I know.").queue();
         }
+
+        log.info("user after opting out: {}", userData);
     }
 }
