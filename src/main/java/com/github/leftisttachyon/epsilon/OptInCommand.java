@@ -61,6 +61,6 @@ public class OptInCommand extends Command {
             evt.getChannel().sendMessage("`" + data + "` doesn't match any type of music trades that I know.").queue();
         }
 
-        log.info("User after opting in: {}", userData);
+        log.trace("User after opting in: {}", userData);
     }
 }

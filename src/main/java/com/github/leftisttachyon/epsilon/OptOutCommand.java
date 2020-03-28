@@ -57,6 +57,6 @@ public class OptOutCommand extends Command {
             evt.getChannel().sendMessage("`" + data + "` doesn't match any type of music trades that I know.").queue();
         }
 
-        log.info("user after opting out: {}", userData);
+        log.trace("user after opting out: {}", userData);
     }
 }

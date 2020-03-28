@@ -27,13 +27,13 @@ public class GuildInfoService implements Closeable {
     /**
      * A {@link HashMap} that stores data related to each server.
      */
-    private HashMap<Long, GuildData> serverContainers;
+    private HashMap<Long, GuildData> guildData;
 
     /**
      * Creates a new {@link GuildInfoService}.
      */
     private GuildInfoService() {
-        serverContainers = new HashMap<>();
+        guildData = new HashMap<>();
     }
 
     /**
@@ -54,11 +54,11 @@ public class GuildInfoService implements Closeable {
      * {@code createIfNotExists} is false
      */
     public GuildConfig getGuildConfig(long guildID, boolean createIfNotExists) {
-        if (serverContainers.containsKey(guildID)) {
-            return serverContainers.get(guildID).config;
+        if (guildData.containsKey(guildID)) {
+            return guildData.get(guildID).config;
         } else if (createIfNotExists) {
             GuildData blank = new GuildData(guildID, false);
-            serverContainers.put(guildID, blank);
+            guildData.put(guildID, blank);
 
             return blank.config;
         } else return null;
@@ -73,23 +73,26 @@ public class GuildInfoService implements Closeable {
      * @return the found or created object or {@link null}
      */
     public UserData getUserData(long guildID, User user, boolean createIfNotExists) {
-        if (serverContainers.containsKey(guildID)) {
-            return serverContainers.get(guildID).getUserData(user, createIfNotExists);
+        log.trace("Looking for guild #{}", guildID);
+
+        if (guildData.containsKey(guildID)) {
+            log.trace("Found it! Passing off to guild object.");
+
+            return guildData.get(guildID).getUserData(user, createIfNotExists);
         } else if (createIfNotExists) {
-            GuildData blank = new GuildData(guildID, false);
-            serverContainers.put(guildID, blank);
-
             long userID = user.getIdLong();
-            UserData temp = new UserData(userID);
-            blank.users.put(userID, temp);
+            log.trace("Could not find, creating guild data object");
 
-            return temp;
+            GuildData blank = new GuildData(guildID, false);
+            guildData.put(guildID, blank);
+
+            return blank.getUserData(user, true);
         } else return null;
     }
 
     @Override
     public void close() {
-        for (GuildData data : serverContainers.values()) {
+        for (GuildData data : guildData.values()) {
             data.save();
             data.close();
         }
@@ -179,10 +182,15 @@ public class GuildInfoService implements Closeable {
          */
         private UserData getUserData(User user, boolean createIfNotExists) {
             long userID = user.getIdLong();
+            log.trace("Retrieving user #{}", userID);
 
             if (users.containsKey(userID)) {
+                log.trace("Found it!");
+
                 return users.get(userID);
             } else if (createIfNotExists) {
+                log.trace("Could not find, creating.");
+
                 UserData blank = new UserData(userID);
                 users.put(userID, blank);
 
@@ -194,10 +202,12 @@ public class GuildInfoService implements Closeable {
          * Loads the config settings from the cloud.
          */
         private void loadConfig() {
+            log.trace("Loading config for #{}....", guildID);
+
             try (FileInputStream fis = new FileInputStream(configBlob.getBlob());
                  ObjectInputStream ois = new ObjectInputStream(fis)) {
                 config = (GuildConfig) ois.readObject();
-                log.info("config: {}", config);
+                log.trace("config: {}", config);
             } catch (IOException | ClassNotFoundException e) {
                 log.warn("Could not load configuration for guild #" + guildID, e);
 
@@ -209,10 +219,12 @@ public class GuildInfoService implements Closeable {
          * Loads user data from the cloud.
          */
         private void loadUsers() {
+            log.trace("Loading user data for #{}...", guildID);
+
             try (FileInputStream fis = new FileInputStream(userBlob.getBlob());
                  ObjectInputStream ois = new ObjectInputStream(fis)) {
                 users = (HashMap<Long, UserData>) ois.readObject();
-                log.info("users: {}", users);
+                log.trace("users: {}", users);
             } catch (IOException | ClassNotFoundException e) {
                 log.warn("Could not load user data for guild #" + guildID, e);
 
