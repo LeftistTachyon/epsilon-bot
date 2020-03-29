@@ -13,9 +13,12 @@ If you're running in a console or something of the sort, you can exit by typing 
 Do not, I repeat, DO NOT, use `Ctrl + C` to exit this program if you want data related to this bot to be saved for later usage.  
 
 ## Features  
-Some of these features are under construction and will be denoted with `(WIP)`.  
+### What is this bot built for?  
+Epsilon is mainly used for two things: song trades and album trades.
  - Song trades: suggesting songs for other people to listen to, secret-santa style. After you listen to the song, you rate it from one to ten and leave some thoughts if necessary.
  - Album trades: song trades, but less common and includes an entire album. You must have participated in a song trade beforehand in order to join an album trade.
+### Bot features
+Some of these features are under construction and will be denoted with `(WIP)`.  
  - Opting in and out of such trades
  - Adding extra information to your profile to help your giver to find a song that you would like `(WIP)`
  - Automagically automating every task for trades `(WIP)`
