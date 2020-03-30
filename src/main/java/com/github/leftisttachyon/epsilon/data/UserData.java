@@ -15,6 +15,11 @@ import java.time.LocalDate;
 @Data
 public class UserData implements Serializable {
     /**
+     * An ID used for serialization.
+     */
+    private static final long serialVersionUID = -840545327971358081L;
+
+    /**
      * Whether this user is in song trades.
      */
     private boolean inSong;
@@ -26,6 +31,10 @@ public class UserData implements Serializable {
      * The last date when this {@link UserData} participated in trades.
      */
     private LocalDate lastParticipated;
+    /**
+     * A {@link String} that contains a URL that links to this person's music profile, if any.
+     */
+    private String musicProfile;
     /**
      * The ID of the user that this object wraps.
      */

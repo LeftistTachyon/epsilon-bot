@@ -1,5 +1,6 @@
-package com.github.leftisttachyon.epsilon;
+package com.github.leftisttachyon.epsilon.commands;
 
+import com.github.leftisttachyon.epsilon.GuildInfoService;
 import com.github.leftisttachyon.epsilon.data.UserData;
 import com.github.leftisttachyon.modulardiscordbot.commands.Command;
 import lombok.extern.slf4j.Slf4j;
@@ -13,14 +14,27 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
  */
 @Slf4j
 public class OptOutCommand extends Command {
+    /**
+     * The global instance
+     */
+    private static final OptOutCommand INSTANCE = new OptOutCommand();
 
     /**
      * Creates a new {@link OptOutCommand}.
      */
-    public OptOutCommand() {
+    private OptOutCommand() {
         super("A command that opts out of the regular song or album trades.\n" +
                 "To opt out of song trades, then type \"" + PREFIX + "optout song\".\n" +
                 "To opt out of album trades, then type \"" + PREFIX + "optout album\".", new String[]{"optout"});
+    }
+
+    /**
+     * Returns the global instance of an {@link OptOutCommand}.
+     *
+     * @return the global instance of an {@link OptOutCommand}
+     */
+    public static OptOutCommand getInstance() {
+        return INSTANCE;
     }
 
     @Override

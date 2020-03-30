@@ -14,6 +14,11 @@ import java.time.Period;
 @Data
 public class GuildConfig implements Serializable {
     /**
+     * An ID for serialization
+     */
+    private static final long serialVersionUID = -1960983752378643009L;
+
+    /**
      * The interval between each song trade.
      */
     private Period songInterval;

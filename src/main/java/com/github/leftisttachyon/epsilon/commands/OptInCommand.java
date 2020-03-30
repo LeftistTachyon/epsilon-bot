@@ -1,5 +1,6 @@
-package com.github.leftisttachyon.epsilon;
+package com.github.leftisttachyon.epsilon.commands;
 
+import com.github.leftisttachyon.epsilon.GuildInfoService;
 import com.github.leftisttachyon.epsilon.data.UserData;
 import com.github.leftisttachyon.modulardiscordbot.commands.Command;
 import lombok.extern.slf4j.Slf4j;
@@ -15,12 +16,26 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class OptInCommand extends Command {
 
     /**
+     * The global instance for the {@link OptInCommand}
+     */
+    private static final OptInCommand INSTANCE = new OptInCommand();
+
+    /**
      * Creates a new {@link OptInCommand}.
      */
-    public OptInCommand() {
+    private OptInCommand() {
         super("A command that opts in to the regular song or album trades.\n" +
                 "To opt in to song trades, then type \"" + PREFIX + "optin song\".\n" +
                 "To opt in to album trades, then type \"" + PREFIX + "optin album\".", new String[]{"optin"});
+    }
+
+    /**
+     * Returns the global instance of an {@link OptInCommand}.
+     *
+     * @return the global instance of an {@link OptInCommand}
+     */
+    public static OptInCommand getInstance() {
+        return INSTANCE;
     }
 
     @Override

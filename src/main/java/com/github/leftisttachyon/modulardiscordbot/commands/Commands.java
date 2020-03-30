@@ -1,8 +1,8 @@
 package com.github.leftisttachyon.modulardiscordbot.commands;
 
-import com.github.leftisttachyon.epsilon.GuildInfoService;
-import com.github.leftisttachyon.epsilon.OptInCommand;
-import com.github.leftisttachyon.epsilon.OptOutCommand;
+import com.github.leftisttachyon.epsilon.commands.OptInCommand;
+import com.github.leftisttachyon.epsilon.commands.OptOutCommand;
+import com.github.leftisttachyon.epsilon.commands.SetProfileCommand;
 import com.github.leftisttachyon.modulardiscordbot.commands.impl.HelpCommand;
 
 import java.time.Duration;
@@ -55,13 +55,16 @@ public class Commands {
         List<Command> songTradeCommands = new ArrayList<>();
 
         // the "!!optin" command
-        songTradeCommands.add(new OptInCommand());
+        songTradeCommands.add(OptInCommand.getInstance());
 
         // the "!!optout" command
-        songTradeCommands.add(new OptOutCommand());
+        songTradeCommands.add(OptOutCommand.getInstance());
+
+        // the "!!setprofile" command
+        songTradeCommands.add(SetProfileCommand.getInstance());
 
         // add the "Song Trade" commands
-        commands.put("Song Trades", songTradeCommands);
+        commands.put("Song Trade", songTradeCommands);
     }
 
     /**
