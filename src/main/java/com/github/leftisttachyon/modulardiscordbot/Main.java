@@ -36,8 +36,8 @@ import static com.github.leftisttachyon.modulardiscordbot.commands.Command.PREFI
  */
 @Slf4j
 public class Main extends ListenerAdapter {
-    // perm number: 477248
-    // invite link: https://discordapp.com/api/oauth2/authorize?client_id=690006370140815500&permissions=537348160&redirect_uri=http%3A%2F%2Fdsipaint.com%2Fgroup%2F%3Fid%3D11945&response_type=code&scope=bot
+    // perm number: 268946496
+    // invite link: https://discordapp.com/api/oauth2/authorize?client_id=690006370140815500&permissions=268953664&redirect_uri=http%3A%2F%2Fdsipaint.com%2Fgroup%2Findex.php%3Fid%3D11945&scope=bot
 
     /**
      * Creates a new Main object

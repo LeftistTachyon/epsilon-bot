@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3fe355d1-934b-4e17-9c79-6abd6eb569ac" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/EpsilonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/EpsilonUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/commands/OptInCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/commands/OptInCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/commands/OptOutCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/commands/OptOutCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/commands/SetIntervalCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/commands/SetIntervalCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/commands/SetProfileCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/epsilon/commands/SetProfileCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/modulardiscordbot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/leftisttachyon/modulardiscordbot/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,22 +121,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584667866447" />
-    <state width="914" height="281" key="GridCell.Tab.0.bottom" timestamp="1584674203680">
+    <state width="914" height="281" key="GridCell.Tab.0.bottom" timestamp="1586126931382">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584674203680" />
-    <state width="914" height="281" key="GridCell.Tab.0.center" timestamp="1584674203679">
+    <state width="914" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586126931382" />
+    <state width="914" height="281" key="GridCell.Tab.0.center" timestamp="1586126931381">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584674203679" />
-    <state width="914" height="281" key="GridCell.Tab.0.left" timestamp="1584674203679">
+    <state width="914" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586126931381" />
+    <state width="914" height="281" key="GridCell.Tab.0.left" timestamp="1586126931381">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584674203679" />
-    <state width="914" height="281" key="GridCell.Tab.0.right" timestamp="1584674203679">
+    <state width="914" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586126931381" />
+    <state width="914" height="281" key="GridCell.Tab.0.right" timestamp="1586126931382">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584674203679" />
+    <state width="914" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586126931382" />
     <state x="10" y="178" key="Maven.ArtifactSearchDialog" timestamp="1585192788273">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -149,10 +145,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="922" y="166" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1584664890490" />
-    <state x="1161" y="268" width="540" height="524" key="StructurePopup" timestamp="1586126194198">
+    <state x="1161" y="268" width="570" height="524" key="StructurePopup" timestamp="1586126371240">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1161" y="268" width="540" height="524" key="StructurePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1586126194198" />
+    <state x="1161" y="268" width="570" height="524" key="StructurePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1586126371240" />
     <state x="289" y="440" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585189535815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
