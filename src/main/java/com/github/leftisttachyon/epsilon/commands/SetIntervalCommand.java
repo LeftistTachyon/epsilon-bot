@@ -1,16 +1,13 @@
 package com.github.leftisttachyon.epsilon.commands;
 
+import com.github.leftisttachyon.epsilon.EpsilonUtils;
 import com.github.leftisttachyon.epsilon.GuildInfoService;
 import com.github.leftisttachyon.epsilon.data.GuildConfig;
 import com.github.leftisttachyon.epsilon.data.UserData;
 import com.github.leftisttachyon.modulardiscordbot.commands.Command;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import java.util.List;
-import java.util.Objects;
+import java.time.Period;
 
 /**
  * A command that sets the interval between each trade event.
@@ -43,16 +40,9 @@ public class SetIntervalCommand extends Command {
 
     @Override
     public void invoke(MessageReceivedEvent evt) {
-        User author = evt.getAuthor();
-        Guild guild = evt.getGuild();
-        List<Role> roles =
-                Objects.requireNonNull(guild.getMember(author), "User is not in this server")
-                        .getRoles();
-
-
-        GuildInfoService gis = GuildInfoService.getInstance();
-        long guildID = guild.getIdLong();
-        GuildConfig guildConfig = gis.getGuildConfig(guildID, true);
+        if (!EpsilonUtils.validateIsManager(evt)) {
+            return;
+        }
 
         String message = evt.getMessage().getContentRaw();
         if (!message.contains(" ")) {
@@ -62,7 +52,19 @@ public class SetIntervalCommand extends Command {
             return;
         }
 
-        String data = message.substring(message.indexOf(' ') + 1).toLowerCase();
-        UserData userData = gis.getUserData(guildID, author, true);
+        String[] data = message.split(" ");
+        GuildConfig guildConfig = GuildInfoService.getInstance()
+                .getGuildConfig(evt.getGuild().getIdLong(), true);
+
+        if (data[1].equalsIgnoreCase("song")) {
+            Period p = EpsilonUtils.parsePeriod(data[2]);
+            guildConfig.setSongInterval(p);
+        } else if (data[1].equalsIgnoreCase("album")) {
+            Period p = EpsilonUtils.parsePeriod(data[2]);
+            guildConfig.setAlbumInterval(p);
+        } else {
+            evt.getChannel().sendMessage("`" + data[1] + "` doesn't match any type of music trades that I know.")
+                    .queue();
+        }
     }
 }

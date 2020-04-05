@@ -46,7 +46,7 @@ public class SetProfileCommand extends Command {
             return;
         }
 
-        String data = message.substring(message.indexOf(' ') + 1).toLowerCase();
+        String data = message.substring(message.indexOf(' ') + 1);
 
         UrlValidator urlValidator = new UrlValidator(new String[]{"http", "https"});
         if (urlValidator.isValid(data)) {

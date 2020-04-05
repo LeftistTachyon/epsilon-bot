@@ -48,11 +48,11 @@ public class OptInCommand extends Command {
             return;
         }
 
-        String data = message.substring(message.indexOf(' ') + 1).toLowerCase();
+        String data = message.substring(message.indexOf(' ') + 1);
         UserData userData = GuildInfoService.getInstance()
                 .getUserData(evt.getGuild().getIdLong(), evt.getAuthor(), true);
 
-        if ("song".equals(data)) {
+        if ("song".equalsIgnoreCase(data)) {
             if (userData.isInSong()) {
                 evt.getChannel().sendMessage("You're already opted into song trades.").queue();
             } else {
@@ -60,7 +60,7 @@ public class OptInCommand extends Command {
 
                 evt.getChannel().sendMessage("Successfully opted you into song trades!").queue();
             }
-        } else if ("album".equals(data)) {
+        } else if ("album".equalsIgnoreCase(data)) {
             if (userData.hasParticipated()) {
                 if (userData.isInAlbum()) {
                     evt.getChannel().sendMessage("You're already opted into album trades.").queue();
