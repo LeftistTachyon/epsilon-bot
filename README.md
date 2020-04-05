@@ -20,6 +20,15 @@ Epsilon is mainly used for two things: song trades and album trades.
 ### Bot features
 Some of these features are under construction and will be denoted with `(WIP)`.  
  - Opting in and out of such trades
- - Adding extra information to your profile to help your giver to find a song that you would like `(WIP)`
+ - Adding extra information to your profile to help your giver to find a song that you would like
  - Automagically automating every task for trades `(WIP)`
  - Periodic timing for trades, or manually starting them `(WIP)`
+ 
+ ## Inviting this bot to your server  
+ You can invite this bot to your server by clicking on [this link](https://discordapp.com/api/oauth2/authorize?client_id=690006370140815500&permissions=268953664&redirect_uri=http%3A%2F%2Fdsipaint.com%2Fgroup%2Findex.php%3Fid%3D11945&scope=bot).  
+ Keep in mind it'll only be functional if it is running somewhere and therefore online and connected to Discord.
+
+### Other information  
+ - This bot is not meant to be run in parallel from two computers. If two concurrent instances of Epsilon are run, some 
+ information may not be saved and/or unexpected behaviors may arise.
+   - I may implement some locking function to prevent this from happening. 
