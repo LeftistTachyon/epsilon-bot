@@ -1,15 +1,21 @@
 package com.github.leftisttachyon.modulardiscordbot;
 
 import com.github.leftisttachyon.epsilon.GuildInfoService;
+import com.github.leftisttachyon.epsilon.data.GuildConfig;
 import com.github.leftisttachyon.modulardiscordbot.commands.Command;
 import com.github.leftisttachyon.modulardiscordbot.commands.Commands;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.ShutdownEvent;
+import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.restaction.RoleAction;
 
 import javax.annotation.Nonnull;
 import javax.security.auth.login.LoginException;
@@ -118,5 +124,27 @@ public class Main extends ListenerAdapter {
         log.info("Save and close successful, now exiting");
 
         System.exit(0);
+    }
+
+    @Override
+    public void onGuildJoin(@Nonnull GuildJoinEvent evt) {
+        Guild guild = evt.getGuild();
+        log.info("Just joined guild #{}", guild.getId());
+
+        Role r = guild.createRole()
+                .setName("Music Trade Manager")
+                .setMentionable(true).complete();
+
+        GuildInfoService gis = GuildInfoService.getInstance();
+        GuildConfig guildConfig = gis.getGuildConfig(guild.getIdLong(), true);
+        guildConfig.setManagerRoleID(r.getIdLong());
+
+        TextChannel defaultChannel = guild.getDefaultChannel();
+        if (defaultChannel != null) {
+            defaultChannel.sendMessage("Hello there! I'm Epsilon, and I can manage music trades.\n" +
+                    "Type `" + PREFIX + "help` to get started.").queue();
+            defaultChannel.sendMessage("Those who wish to manage the music trades should give themselves the " +
+                    "`Music Trade Manager` role.").queue();
+        }
     }
 }

@@ -30,4 +30,8 @@ public class GuildConfig implements Serializable {
      * Whether error messages should be sent into the guild channel which caused them.
      */
     private boolean sendErrorMessages;
+    /**
+     * The ID of the role that manages music trades
+     */
+    private long managerRoleID;
 }
