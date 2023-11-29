@@ -34,7 +34,7 @@
         <lombok.version>1.18.12</lombok.version>
         <maven-jar.version>3.2.0</maven-jar.version>
         <jda.version>4.0.0_62</jda.version>
-        <logback.version>1.2.3</logback.version>
+        <logback.version>1.3.12</logback.version>
     </properties>
 
     <dependencies>
